@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSCI ETF 各國權重與最新 USD 即時市場報酬率儀表板</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+
+    <!-- Header Navigation -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-indigo-600 rounded-lg text-white">
+                    <i data-lucide="pie-chart" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg text-slate-100 leading-tight">MSCI ETF 各國權重與即時報酬儀表板</h1>
+                    <p class="text-xs text-slate-400">自由流通市值 (Free-Float Adjusted) ｜ 全面採用 <strong class="text-indigo-400">美元計價 (USD Return)</strong></p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:flex flex-col text-right text-xs text-slate-400">
+                    <span>資料計價幣別: <strong class="text-indigo-400">美元 (USD)</strong></span>
+                    <span>最新資料基準日: <strong class="text-indigo-400">2026-11-06 (即時)</strong></span>
+                </div>
+                <button id="refresh-btn" onclick="fetchLiveMarketData()" class="flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-3 py-2 rounded-lg transition shadow-lg shadow-indigo-600/20">
+                    <i data-lucide="refresh-cw" id="refresh-icon" class="w-4 h-4"></i>
+                    <span>更新最新即時數據</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        
+        <!-- ETF Selector Tabs -->
+        <div class="bg-slate-900 p-2 rounded-xl border border-slate-800 flex flex-wrap gap-2">
+            <button onclick="switchETF('EEM')" id="tab-EEM" class="etf-tab flex-1 min-w-[120px] py-2.5 px-4 rounded-lg font-semibold text-sm transition flex items-center justify-center space-x-2 bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
+                <span>EEM</span>
+                <span class="text-xs opacity-75 font-normal">(新興市場)</span>
+            </button>
+            <button onclick="switchETF('ACWI')" id="tab-ACWI" class="etf-tab flex-1
